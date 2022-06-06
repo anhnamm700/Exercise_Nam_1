@@ -10,30 +10,27 @@ interface Props {
 }
 
 const LoginForm = (props: Props) => {
-  const { onLogin, loading, errorMessage } = props;
+  const { onLogin, loading, errorMessage } = props; 
 
   const [formValues, setFormValues] = React.useState<ILoginParams>({ email: '', password: '', rememberMe: false });
   const [validate, setValidate] = React.useState<ILoginValidation>();
+  
 
-  const onSubmit = React.useCallback(() => {
-    const validate = validateLogin(formValues);
+  const onSubmitLogin = () => {
+    const validateInput = validateLogin(formValues);
 
-    setValidate(validate);
-
-    if (!validLogin(validate)) {
-      return;
-    }
-
+    setValidate(validateInput);
     onLogin(formValues);
-  }, [formValues, onLogin]);
+    
+  }
 
   return (
     <form
       style={{ maxWidth: '560px', width: '100%' }}
       noValidate
-      onSubmit={(e) => {
+      onSubmit={e => {
         e.preventDefault();
-        onSubmit();
+        onSubmitLogin();
       }}
       className="row g-3 needs-validation"
     >
@@ -52,7 +49,7 @@ const LoginForm = (props: Props) => {
           className="form-control"
           id="inputEmail"
           value={formValues.email}
-          onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
+          onChange={e => setFormValues({ ...formValues, email: e.target.value })}
         />
 
         {!!validate?.email && (
@@ -71,7 +68,7 @@ const LoginForm = (props: Props) => {
           className="form-control"
           id="inputPassword"
           value={formValues.password}
-          onChange={(e) => setFormValues({ ...formValues, password: e.target.value })}
+          onChange={e => setFormValues({ ...formValues, password: e.target.value })}
         />
 
         {!!validate?.password && (
@@ -87,9 +84,8 @@ const LoginForm = (props: Props) => {
             className="form-check-input"
             type="checkbox"
             id="invalidCheck"
-            value=""
             checked={formValues.rememberMe}
-            onChange={(e) => setFormValues({ ...formValues, rememberMe: !!e.target.checked })}
+            onChange={e => setFormValues({ ...formValues, rememberMe: e.target.checked })}
           />
           <label className="form-check-label" htmlFor="invalidCheck">
             <FormattedMessage id="rememberMe" />

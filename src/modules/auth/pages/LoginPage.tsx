@@ -22,6 +22,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onLogin = React.useCallback(
+    
     async (values: ILoginParams) => {
       setErrorMessage('');
       setLoading(true);
@@ -34,6 +35,7 @@ const LoginPage = () => {
 
       if (json?.code === RESPONSE_STATUS_SUCCESS) {
         dispatch(setUserInfo(json.data));
+        localStorage.setItem('user', JSON.stringify({ ACCESS_TOKEN_KEY, ...values }));
         Cookies.set(ACCESS_TOKEN_KEY, json.data.token, { expires: values.rememberMe ? 7 : undefined });
         dispatch(replace(ROUTES.home));
         return;
