@@ -15,11 +15,16 @@ import { ACCESS_TOKEN_KEY } from '../../../utils/constants';
 import { ROUTES } from '../../../configs/routes';
 import { replace } from 'connected-react-router';
 import { getErrorMessageResponse } from '../../../utils';
+import style from './style.module.scss';
+import ImageComponent from '../../ImageComponent/ImageComponent';
+import { FormattedMessage } from 'react-intl';
 
 const LoginPage = () => {
   const dispatch = useDispatch<ThunkDispatch<AppState, null, Action<string>>>();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const auth = Cookies.get(ACCESS_TOKEN_KEY);
 
   const onLogin = React.useCallback(
     
@@ -46,20 +51,26 @@ const LoginPage = () => {
     [dispatch],
   );
 
+  if (auth) {
+    dispatch(replace(ROUTES.home));
+  }
+  
+
   return (
     <div
-      className="container"
-      style={{
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <img src={logo} alt="" style={{ maxWidth: '250px', margin: '32px' }} />
+      className={`container ${style.loginPage}`}
+    > 
+      <ImageComponent
+        src={logo}
+        alt=""
+        className="image"
+      />
 
       <LoginForm onLogin={onLogin} loading={loading} errorMessage={errorMessage} />
+      
+      <a href="/sign-up">
+        <FormattedMessage id="register"/>
+      </a>
     </div>
   );
 };

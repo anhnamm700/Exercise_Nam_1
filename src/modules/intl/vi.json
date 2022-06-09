@@ -7,5 +7,11 @@
   "emailInvalid": "Địa chỉ email không hợp lệ",
   "passwordRequire": "Vui lòng nhập mật khẩu",
   "minPasswordInvalid": "Mật khẩu tối thiểu 4 ký tự",
-  "register": "Đăng nhập"
+  "register": "Đăng kí",
+  "login": "Đăng nhập",
+  "name": "Họ tên",
+  "nameRequire": "Họ tên không được để trống",
+  "genderRequire": "Giới tính không được để trống",
+  "regionRequire": "Quốc gia không được để trống",
+  "stateRequire": "Thành phố không được để trống"
 }
