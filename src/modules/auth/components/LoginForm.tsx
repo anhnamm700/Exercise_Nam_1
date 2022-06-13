@@ -41,11 +41,11 @@ const LoginForm = (props: Props) => {
     },
     validate,
     onSubmit: values => {
+      console.log("123")
       alert(JSON.stringify(values, null, 2));
     },
   });
   
-
   return (
       <form
         style={{ maxWidth: '560px', width: '100%' }}

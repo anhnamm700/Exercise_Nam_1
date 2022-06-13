@@ -25,7 +25,7 @@ export interface ILocationParams {
   pid: number | null
 }
 
-export interface iGenderParams {
+export interface IGenderParams {
   label: string,
   value: string
 }

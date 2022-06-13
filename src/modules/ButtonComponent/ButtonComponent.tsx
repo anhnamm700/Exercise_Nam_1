@@ -15,7 +15,8 @@ const ButtonComponent = (props : Props) => {
     return (
         <button
             className={className}
-            data-type={type}
+            // data-type={type}
+            type="submit"
             style={style}
             disabled={disabled}
         >

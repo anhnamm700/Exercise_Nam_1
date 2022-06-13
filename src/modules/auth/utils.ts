@@ -1,10 +1,10 @@
-import { ILoginParams, ILoginValidation } from '../../models/auth';
+import { ILoginParams, ILoginValidation, ISignUpParams } from '../../models/auth';
 import { validEmailRegex } from '../../utils';
 
 export const validate = (values : ILoginValidation) => {
   const errors : ILoginValidation = {
     email: '',
-    password: ''
+    password: '',
   };
 
   if (!values.password) {
@@ -13,6 +13,54 @@ export const validate = (values : ILoginValidation) => {
     errors.password = 'minPasswordInvalid';
   }
 
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  return errors;
+};
+
+export const validateSignUp = (values : ISignUpParams) => {
+  const errors : ISignUpParams = {
+    email: '',
+    password: '',
+    repeatPassword: '',
+    name: '',
+    gender: '',
+    region: '',
+    state: ''
+  };
+
+  if (!values.password) {
+    errors.password = 'Required';
+  } else if (values.password.length < 6) {
+    errors.password = 'minPasswordInvalid';
+  }
+
+  if (!values.repeatPassword) {
+    errors.repeatPassword = 'Required';
+  } else if (values.password !== values.repeatPassword) {
+    errors.repeatPassword = 'Not same password';
+  }
+
+  if (!values.name) {
+    errors.name = 'Required';
+  }
+
+  if (!values.region) {
+    errors.repeatPassword = 'Required';
+  } 
+
+  if (!values.state) {
+    errors.state = 'Required';
+  } 
+
+  if (!values.gender) {
+    errors.gender = 'Required';
+  } 
+  
   if (!values.email) {
     errors.email = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
